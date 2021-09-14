@@ -1,0 +1,21 @@
+global:
+  scrape_interval:     3s
+
+  external_labels:
+      monitor: 'dms-app'
+
+rule_files:
+
+scrape_configs:
+  - job_name: 'prometheus'
+
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'dms-backend'
+    static_configs:
+    - targets: ['host.docker.internal:5000']
+
+  - job_name: 'dms-frontend'
+    static_configs:
+    - targets: ['host.docker.internal:9113']

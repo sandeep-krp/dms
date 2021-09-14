@@ -1,0 +1,56 @@
+version: "3"
+services:
+  dms-backend:
+    container_name: dms-backend
+    build:
+      context: ../../backend/
+      dockerfile: ../backend/deploy/Dockerfile
+    hostname: dms-backend
+    ports:
+    - "5000:80"
+
+  dms-frontend:
+    container_name: dms-frontend
+    build:
+      context: ../../frontend/
+      dockerfile: ../frontend/deploy/Dockerfile
+    hostname: dms-frontend
+    ports:
+    - 3000:80
+    depends_on:
+    - dms-backend
+
+  # the Prometheus server
+  prometheus:
+    container_name: dms-prometheus
+    image: prom/prometheus:v2.2.1
+    volumes:
+      - ./prometheus/config.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    depends_on:
+    - dms-backend
+    - dms-frontend
+
+  grafana:
+    container_name: dms-grafana
+    image: grafana/grafana:5.1.0
+    volumes:
+      - ./grafana/config.ini:/etc/grafana/grafana.ini
+      - ./grafana/datasource.yaml:/etc/grafana/provisioning/datasources/default.yaml
+      - ./grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/default.yaml
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    ports:
+    - 3001:3000
+    depends_on:
+    - prometheus
+    - nginx-metrics-exporter
+
+  nginx-metrics-exporter:
+    container_name: dms-nginx-metrics-exporter
+    image: nginx/nginx-prometheus-exporter:0.9.0
+    command: ["-nginx.scrape-uri=http://host.docker.internal:3000/basic_status"]
+    ports:
+    - 9113:9113
+    depends_on:
+    - dms-frontend
