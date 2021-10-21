@@ -1,10 +1,11 @@
 FROM python:3.9
-COPY app.py /dms/
+COPY ./app /dms/app
 COPY requirements.txt /dms/
 COPY deploy/dbinit.py /dms/
+COPY run.py /dms/
+COPY config.py /dms
 WORKDIR /dms
 RUN pip install -r requirements.txt
-EXPOSE 5000
+EXPOSE 8080
 ENTRYPOINT [ "python"]
-RUN python dbinit.py
-CMD [ "app.py" ]
+CMD [ "run.py" ]
