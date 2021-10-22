@@ -24,7 +24,7 @@ cd deploy/docker-compose
 
 Run the docker-compose
 ```
-docker-compose.yml up -d
+docker-compose up -d
 ```
 
 Once the docker-compose is successful, you can check open the DMS app on the browser at http://localhost:3000
