@@ -1,3 +1,13 @@
+from apispec import APISpec
+from apispec.ext.marshmallow import MarshmallowPlugin
+
+APISPEC_SPEC = APISpec(
+        title='dms',
+        version='v1',
+        plugins=[MarshmallowPlugin()],
+        openapi_version='3.0.3'
+    )
+
 # Statement for enabling the development environment
 DEBUG = True
 

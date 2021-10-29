@@ -2,12 +2,17 @@ from flask_restful import Resource
 from flask import request, jsonify
 from app import db, api
 from app.connection.models import Connection, connection_schema, connections_schema
+from flask_apispec import doc, marshal_with
+from flask_apispec.views import MethodResource
+from app.connection.models import ConnectionSchema
 
 
 
-class ConnectionManager(Resource):
-    @staticmethod
-    def get():
+class ConnectionManager(MethodResource, Resource):
+
+    @doc(description='Get connections', tags=['Connection'])
+    @marshal_with(ConnectionSchema)
+    def get(self):
         try: id = request.args['id']
         except Exception as _: id = None
 
@@ -21,8 +26,9 @@ class ConnectionManager(Resource):
         res.headers.add("Access-Control-Allow-Origin", "*")
         return res
 
-    @staticmethod
-    def post():
+    @marshal_with(ConnectionSchema)
+    @doc(description='Create a new Connection', tags=['Connection'])
+    def post(self):
         id = request.json['id']
         name = request.json['name']
         version = request.json['version']
@@ -37,8 +43,8 @@ class ConnectionManager(Resource):
             'Message': f'Connection {id} {name} inserted.'
         })
 
-    @staticmethod
-    def put():
+    @doc(description='Update an existing connection', tags=['Connection'])
+    def put(self):
         try: id = request.args['id']
         except Exception as _: id = None
         if not id:
@@ -62,8 +68,8 @@ class ConnectionManager(Resource):
             'Message': f'Connection {id} {name} altered.'
         })
 
-    @staticmethod
-    def delete():
+    @doc(description='Delete an existing source', tags=['Connection'])
+    def delete(self):
         try: id = request.args['id']
         except Exception as _: id = None
         if not id:
