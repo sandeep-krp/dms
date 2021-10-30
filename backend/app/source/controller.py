@@ -42,12 +42,22 @@ class SourceManager(MethodResource, Resource):
             'Message': f'Source : [{name}] inserted.'
         })
 
+
+
+class SourceManagerById(MethodResource, Resource):
+
+    @doc(description='Get source details', tags=['Source'])
+    def get(self, id):
+        source = Source.query.get(id)
+        res = jsonify(source_schema.dump(source))
+        res.headers.add("Access-Control-Allow-Origin", "*")
+        return res
+
+
+
     @doc(description='Update an existing source', tags=['Source'])
-    def put(self):
-        try: id = request.args['id']
-        except Exception as _: id = None
-        if not id:
-            return jsonify({ 'Message': 'Must provide the source ID' })
+    def put(self, id):
+
         source = Source.query.get(id)
 
         name = request.json['name']
@@ -64,11 +74,7 @@ class SourceManager(MethodResource, Resource):
         })
 
     @doc(description='Delete an existing source', tags=['Source'])
-    def delete(self):
-        try: id = request.args['id']
-        except Exception as _: id = None
-        if not id:
-            return jsonify({ 'Message': 'Must provide the source ID' })
+    def delete(self, id):
         source = Source.query.get(id)
 
         db.session.delete(source)

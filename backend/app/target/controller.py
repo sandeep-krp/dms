@@ -40,12 +40,19 @@ class TargetManager(MethodResource, Resource):
             'Message': f'Target [{name}] inserted.'
         })
 
+
+class TargetManagerById(MethodResource, Resource):
+
+    @marshal_with(TargetSchema)
+    @doc(description='Get target details', tags=['Target'])
+    def get(self, id):
+        target = Target.query.get(id)
+        res = jsonify(target_schema.dump(target))
+        res.headers.add("Access-Control-Allow-Origin", "*")
+        return res
+
     @doc(description='Update an existing target', tags=['Target'])
-    def put(self):
-        try: id = request.args['id']
-        except Exception as _: id = None
-        if not id:
-            return jsonify({ 'Message': 'Must provide the target ID' })
+    def put(self, id):
         target = Target.query.get(id)
 
         name = request.json['name']
@@ -62,11 +69,7 @@ class TargetManager(MethodResource, Resource):
         })
 
     @doc(description='Delete an existing target', tags=['Target'])
-    def delete(self):
-        try: id = request.args['id']
-        except Exception as _: id = None
-        if not id:
-            return jsonify({ 'Message': 'Must provide the target ID' })
+    def delete(self, id):
         target = Target.query.get(id)
 
         db.session.delete(target)

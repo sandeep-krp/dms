@@ -7,8 +7,6 @@ from flask_apispec.views import MethodResource
 from app.connection.models import ConnectionSchema
 import uuid
 
-
-
 class ConnectionManager(MethodResource, Resource):
 
     @doc(description='Get connections', tags=['Connection'])
@@ -44,12 +42,20 @@ class ConnectionManager(MethodResource, Resource):
             'Message': f'Connection [{name}] inserted.'
         })
 
+
+
+class ConnectionManagerById(MethodResource, Resource):
+
+    @doc(description='Get connection details', tags=['Connection'])
+    @marshal_with(ConnectionSchema)
+    def get(self,id):
+        connection = Connection.query.get(id)
+        res = jsonify(connection_schema.dump(connection))
+        res.headers.add("Access-Control-Allow-Origin", "*")
+        return res
+
     @doc(description='Update an existing connection', tags=['Connection'])
-    def put(self):
-        try: id = request.args['id']
-        except Exception as _: id = None
-        if not id:
-            return jsonify({ 'Message': 'Must provide the connection ID' })
+    def put(self,id):
         connection = Connection.query.get(id)
 
         name = request.json['name']
@@ -70,11 +76,7 @@ class ConnectionManager(MethodResource, Resource):
         })
 
     @doc(description='Delete an existing source', tags=['Connection'])
-    def delete(self):
-        try: id = request.args['id']
-        except Exception as _: id = None
-        if not id:
-            return jsonify({ 'Message': 'Must provide the connection ID' })
+    def delete(self, id):
         connection = Connection.query.get(id)
 
         db.session.delete(connection)
