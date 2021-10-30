@@ -42,8 +42,6 @@ docs.register(SourceManagerById)
 docs.register(TargetManagerById)
 docs.register(MigrationJobManagerById)
 
-# Build the database:
-# This will create the database file using SQLAlchemy
 
 metrics = PrometheusMetrics(app)
 metrics.info('app_info', 'DMS', version='0.1')

@@ -14,8 +14,16 @@ class MigrationJobManager(MethodResource, Resource):
     @doc(description='Get migration_jobs', tags=['MigrationJob'])
     @marshal_with(MigrationJobSchema)
     def get(self):
-        migration_jobs = MigrationJob.query.all()
-        res = jsonify(migration_jobs_schema.dump(migration_jobs))
+        try: id = request.args['id']
+        except Exception as _: id = None
+
+        if not id:
+            migration_jobs = MigrationJob.query.all()
+            res = jsonify(migration_jobs_schema.dump(migration_jobs))
+            res.headers.add("Access-Control-Allow-Origin", "*")
+            return res
+        migration_job = MigrationJob.query.get(id)
+        res = jsonify(migration_job_schema.dump(migration_job))
         res.headers.add("Access-Control-Allow-Origin", "*")
         return res
 
