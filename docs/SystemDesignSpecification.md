@@ -39,7 +39,7 @@ Reactjs is used for the present user with the user interface on the web browser.
 ## Represntation
 1. **Connection** \
    A connection contains the following metadata: \
-   1.1 `id` : A unique identifire for the connection
+   1.1 `id` : A unique identifire for the connection \
    1.2 `name` : This this is unique field accross all the connections and represents the name of the connection. \
    1.3 `type` : It is a string feild representing the type of the connection. For example it could be RDBMS, S3, Hive, etc. \
    1.4 `version` : This represents the version of connection. If we change the schema of the connection, we should update the version as well. This helps rendering old schemas on the UI. \
@@ -48,9 +48,9 @@ Reactjs is used for the present user with the user interface on the web browser.
 
 2. **Source** \
    A Source contains the following metadata: \
-   2.1 `id` : A unique identifire for the source
+   2.1 `id` : A unique identifire for the source \
    2.1 `name` : The name of the Source. e.g `production-app-db`. \
-   2.2 `connectionId` : Id of the connection this source was derived from
+   2.2 `connectionId` : Id of the connection this source was derived from \
    2.3 `conf` : A JSON representing the configurations of the source. Note that all fields from the `Connection` should be present here as source conf is inherited from the schema of connection. \
    2.4 `namespace` : Rerpresents the name of the namespace this source belongs to.
 
@@ -73,7 +73,7 @@ Reactjs is used for the present user with the user interface on the web browser.
    5.1 `id` : Repersents a unique identifire for the Migration Job Run \
    5.2 `migrationJobId` : The Migration Job Id this MJR belongs to. \
    5.3 `state` : Represents the current state of the migration job. It can be one of the following: `fresh`, `queued`, `running`, `failed`. \
-   5.4. `startTime` : The unix timestamp when MJR started. Null if the job has not started yet. \
+   5.4 `startTime` : The unix timestamp when MJR started. Null if the job has not started yet. \
    5.5 `endTime` : The unix timestamp when the MJR ended (failed or succeeded). Null if the job has not ended yet.
 
 

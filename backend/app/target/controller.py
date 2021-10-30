@@ -8,8 +8,6 @@ from app.target.models import TargetSchema
 import uuid
 
 
-
-
 class TargetManager(MethodResource, Resource):
 
     @marshal_with(TargetSchema)
@@ -39,7 +37,7 @@ class TargetManager(MethodResource, Resource):
         db.session.add(target)
         db.session.commit()
         return jsonify({
-            'Message': f'Target {id} {name} inserted.'
+            'Message': f'Target [{name}] inserted.'
         })
 
     @doc(description='Update an existing target', tags=['Target'])
@@ -60,7 +58,7 @@ class TargetManager(MethodResource, Resource):
 
         db.session.commit()
         return jsonify({
-            'Message': f'Target {id} {name} altered.'
+            'Message': f'Target [{name}] altered.'
         })
 
     @doc(description='Delete an existing target', tags=['Target'])
@@ -75,5 +73,5 @@ class TargetManager(MethodResource, Resource):
         db.session.commit()
 
         return jsonify({
-            'Message': f'Target {str(id)} deleted.'
+            'Message': f'Target [{str(id)}] deleted.'
         })

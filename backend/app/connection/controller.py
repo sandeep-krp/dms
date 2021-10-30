@@ -41,7 +41,7 @@ class ConnectionManager(MethodResource, Resource):
         db.session.add(connection)
         db.session.commit()
         return jsonify({
-            'Message': f'Connection {name} inserted.'
+            'Message': f'Connection [{name}] inserted.'
         })
 
     @doc(description='Update an existing connection', tags=['Connection'])
@@ -66,7 +66,7 @@ class ConnectionManager(MethodResource, Resource):
 
         db.session.commit()
         return jsonify({
-            'Message': f'Connection {id} {name} altered.'
+            'Message': f'Connection [{name}] altered.'
         })
 
     @doc(description='Delete an existing source', tags=['Connection'])
@@ -81,5 +81,5 @@ class ConnectionManager(MethodResource, Resource):
         db.session.commit()
 
         return jsonify({
-            'Message': f'Connection {str(id)} deleted.'
+            'Message': f'Connection [{str(id)}] deleted.'
         })

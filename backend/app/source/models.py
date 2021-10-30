@@ -7,17 +7,15 @@ class Source(db.Model):
     connectionId = db.Column(db.String(128))
 
 
-    def __init__(self, id, name, version, conf_blob, connectionId):
+    def __init__(self, id, name, conf_blob, connectionId):
         self.id = id
         self.name = name
-        self.version = version
         self.conf_blob = conf_blob
         self.connectionId = connectionId
-        self.type = type
 
 class SourceSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'name', 'version', 'connectionId', 'conf_blob')
+        fields = ('id', 'name', 'connectionId', 'conf_blob')
 
 source_schema = SourceSchema()
 sources_schema = SourceSchema(many=True)

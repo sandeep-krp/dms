@@ -39,8 +39,9 @@ class SourceManager(MethodResource, Resource):
         db.session.add(source)
         db.session.commit()
         return jsonify({
-            'Message': f'Source {id} {name} inserted.'
+            'Message': f'Source : [{name}] inserted.'
         })
+
     @doc(description='Update an existing source', tags=['Source'])
     def put(self):
         try: id = request.args['id']
@@ -59,7 +60,7 @@ class SourceManager(MethodResource, Resource):
 
         db.session.commit()
         return jsonify({
-            'Message': f'Source {id} {name} altered.'
+            'Message': f'Source [{name}] altered.'
         })
 
     @doc(description='Delete an existing source', tags=['Source'])
@@ -74,5 +75,5 @@ class SourceManager(MethodResource, Resource):
         db.session.commit()
 
         return jsonify({
-            'Message': f'Source {str(id)} deleted.'
+            'Message': f'Source [{str(id)}] deleted.'
         })
