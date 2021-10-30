@@ -4,7 +4,7 @@ from app import db
 from app.source.models import Source, source_schema, sources_schema
 from flask_apispec import doc, marshal_with
 from flask_apispec.views import MethodResource
-
+import uuid
 from app.source.models import SourceSchema
 
 
@@ -30,7 +30,7 @@ class SourceManager(MethodResource, Resource):
     @doc(description='Create a new Source', tags=['Source'])
     @marshal_with(SourceSchema)
     def post(self):
-        id = request.json['id']
+        id = 'src-' + str(uuid.uuid4())
         name = request.json['name']
         connection_id = request.json['connection_id']
         conf_blob = request.json['conf_blob']

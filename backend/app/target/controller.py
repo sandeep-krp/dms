@@ -5,6 +5,7 @@ from app.target.models import Target, target_schema, targets_schema
 from flask_apispec.views import MethodResource
 from flask_apispec import doc, marshal_with
 from app.target.models import TargetSchema
+import uuid
 
 
 
@@ -29,7 +30,7 @@ class TargetManager(MethodResource, Resource):
 
     @doc(description='Create a new target', tags=['Target'])
     def post(self):
-        id = request.json['id']
+        id = 'trg-' + str(uuid.uuid4())
         name = request.json['name']
         connection_id = request.json['connection_id']
         conf_blob = request.json['conf_blob']

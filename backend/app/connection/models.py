@@ -1,7 +1,7 @@
 from app import db, ma
 
 class Connection(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(128), primary_key=True)
     name = db.Column(db.String(1024), unique=True)
     version = db.Column(db.String(128))
     schema_blob = db.Column(db.Text())

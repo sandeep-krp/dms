@@ -5,6 +5,7 @@ from app.connection.models import Connection, connection_schema, connections_sch
 from flask_apispec import doc, marshal_with
 from flask_apispec.views import MethodResource
 from app.connection.models import ConnectionSchema
+import uuid
 
 
 
@@ -29,7 +30,7 @@ class ConnectionManager(MethodResource, Resource):
     @marshal_with(ConnectionSchema)
     @doc(description='Create a new Connection', tags=['Connection'])
     def post(self):
-        id = request.json['id']
+        id = 'con-'+str(uuid.uuid4())
         name = request.json['name']
         version = request.json['version']
         type = request.json['type']
@@ -40,7 +41,7 @@ class ConnectionManager(MethodResource, Resource):
         db.session.add(connection)
         db.session.commit()
         return jsonify({
-            'Message': f'Connection {id} {name} inserted.'
+            'Message': f'Connection {name} inserted.'
         })
 
     @doc(description='Update an existing connection', tags=['Connection'])

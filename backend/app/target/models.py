@@ -1,10 +1,10 @@
 from app import db, ma
 
 class Target(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(128), primary_key=True)
     name = db.Column(db.String(1024), unique=True)
     conf_blob = db.Column(db.Text())
-    connectionId = db.Column(db.Integer)
+    connectionId = db.Column(db.String(128))
 
 
     def __init__(self, id, name, version, conf_blob, connectionId):
