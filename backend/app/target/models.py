@@ -3,7 +3,7 @@ from app import db, ma
 class Target(db.Model):
     id = db.Column(db.String(128), primary_key=True)
     name = db.Column(db.String(1024), unique=True)
-    conf_blob = db.Column(db.Text())
+    conf_blob = db.Column(db.JSON)
     connection_id = db.Column(db.String(128))
 
 

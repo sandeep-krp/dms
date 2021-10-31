@@ -50,7 +50,7 @@ Reactjs is used for the present user with the user interface on the web browser.
    A Source contains the following metadata: \
    2.1 `id` : A unique identifire for the source \
    2.1 `name` : The name of the Source. e.g `production-app-db`. \
-   2.2 `connectionId` : Id of the connection this source was derived from \
+   2.2 `connection_id` : Id of the connection this source was derived from \
    2.3 `conf` : A JSON representing the configurations of the source. Note that all fields from the `Connection` should be present here as source conf is inherited from the schema of connection. \
    2.4 `namespace` : Rerpresents the name of the namespace this source belongs to.
 
@@ -58,7 +58,7 @@ Reactjs is used for the present user with the user interface on the web browser.
    A Target contains the following metadata: \
    3.1 `id` : A unique identifire for the target \
    3.1 `name` : The name of the Target. e.g `production-app-db`. \
-   3.2 `connectionId` : Id of the connection this target was derived from \
+   3.2 `connection_id` : Id of the connection this target was derived from \
    3.3 `conf` : A JSON representing the configurations of the target. Note that all fields from the `Connection` should be present here as target conf is inherited from the schema of connection. \
    3.4 `namespace` : Rerpresents the name of the namespace this target belongs to.
 

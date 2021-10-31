@@ -35,7 +35,7 @@ class SourceManager(MethodResource, Resource):
         connection_id = request.json['connection_id']
         conf_blob = request.json['conf_blob']
 
-        source = Source(id, name, connection_id, conf_blob)
+        source = Source(id, name, conf_blob, connection_id)
         db.session.add(source)
         db.session.commit()
         return jsonify({

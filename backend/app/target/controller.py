@@ -33,7 +33,7 @@ class TargetManager(MethodResource, Resource):
         connection_id = request.json['connection_id']
         conf_blob = request.json['conf_blob']
 
-        target = Target(id, name, connection_id, conf_blob)
+        target = Target(id, name, conf_blob, connection_id)
         db.session.add(target)
         db.session.commit()
         return jsonify({

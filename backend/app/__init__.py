@@ -20,7 +20,8 @@ ma = Marshmallow(app)
 from app.connection.controller import ConnectionManager, ConnectionManagerById
 from app.source.controller import SourceManager, SourceManagerById
 from app.target.controller import TargetManager, TargetManagerById
-from app.migration_job.controller import MigrationJobManager, MigrationJobManagerById
+from app.migration_job.controller import MigrationJobManager, MigrationJobManagerById, MigrationJobActionManager
+
 api.add_resource(ConnectionManager, '/api/v1/connection')
 api.add_resource(SourceManager, '/api/v1/source')
 api.add_resource(TargetManager, '/api/v1/target')
@@ -30,6 +31,8 @@ api.add_resource(ConnectionManagerById, '/api/v1/connection/<string:id>')
 api.add_resource(SourceManagerById, '/api/v1/source/<string:id>')
 api.add_resource(TargetManagerById, '/api/v1/target/<string:id>')
 api.add_resource(MigrationJobManagerById, '/api/v1/migrationjob/<string:id>')
+api.add_resource(MigrationJobActionManager, '/api/v1/migrationjob/<string:id>/<string:action>')
+
 docs = FlaskApiSpec(app)
 
 docs.register(ConnectionManager)
@@ -41,6 +44,7 @@ docs.register(ConnectionManagerById)
 docs.register(SourceManagerById)
 docs.register(TargetManagerById)
 docs.register(MigrationJobManagerById)
+docs.register(MigrationJobActionManager)
 
 
 metrics = PrometheusMetrics(app)
