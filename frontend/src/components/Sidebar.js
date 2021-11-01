@@ -43,16 +43,28 @@ function Sidebar() {
             <span className="sidebar-text">Home</span>
           </div>
         </Link>
-        <Link to="/migrations" className="sidebar-link">
-          <div className="item" onClick={handleSidebarItemClick}>
-            <RiChat4Fill className="sidebar-icon" />
-            <span className="sidebar-text">Migrations</span>
-          </div>
-        </Link>
         <Link to="/connections" className="sidebar-link">
           <div className="item" onClick={handleSidebarItemClick}>
             <RiTeamFill className="sidebar-icon" />
             <span className="sidebar-text">Connections</span>
+          </div>
+        </Link>
+        <Link to="/sources" className="sidebar-link">
+          <div className="item" onClick={handleSidebarItemClick}>
+            <RiTeamFill className="sidebar-icon" />
+            <span className="sidebar-text">Sources</span>
+          </div>
+        </Link>
+        <Link to="/targets" className="sidebar-link">
+          <div className="item" onClick={handleSidebarItemClick}>
+            <RiTeamFill className="sidebar-icon" />
+            <span className="sidebar-text">Targets</span>
+          </div>
+        </Link>
+        <Link to="/migrations" className="sidebar-link">
+          <div className="item" onClick={handleSidebarItemClick}>
+            <RiChat4Fill className="sidebar-icon" />
+            <span className="sidebar-text">Migrations</span>
           </div>
         </Link>
       </div>

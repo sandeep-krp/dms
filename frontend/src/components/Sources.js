@@ -1,26 +1,26 @@
 import React from 'react';
 import axios from 'axios';
 import {Table} from 'antd';
-class Connections extends React.Component {
+class Sources extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            connections: [],
+            sources: [],
             loading: true
         }
     }
 
-    async getConnectionsData() {
+    async getSourcesData() {
         try {
-            const res = await axios.get('http://localhost:8080/api/v1/connection')
-            this.setState({ loading: false, connections: res.data })
+            const res = await axios.get('http://localhost:8080/api/v1/source')
+            this.setState({ loading: false, sources: res.data })
         } catch {
-            console.error("Could not get connections")
+            console.error("Could not get sources")
         }
     }
 
     componentDidMount() {
-        this.getConnectionsData()
+        this.getSourcesData()
     }
 
     render() {
@@ -36,20 +36,15 @@ class Connections extends React.Component {
                 dataIndex: 'name'
             },
             {
-                title: 'Type',
-                key: 'type',
-                dataIndex: 'type'
-            },
-            {
                 title: 'Schema',
-                key: 'schema_blob',
-                dataIndex: 'schema_blob',
+                key: 'conf_blob',
+                dataIndex: 'conf_blob',
                 render: d => JSON.stringify(d)
             }
         ]
         return (<div style={{ height: 400, width: '70%' }}>
                 <Table
-                    dataSource = {this.state.connections}
+                    dataSource = {this.state.sources}
                     columns = {columns}
                 />
                 </div>
@@ -57,4 +52,4 @@ class Connections extends React.Component {
     }
 }
 
-export default Connections;
+export default Sources;
